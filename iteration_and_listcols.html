@@ -389,7 +389,7 @@ l</code></pre>
 ## 
 ## $summary
 ##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-## -3.05843 -0.69965 -0.04926 -0.04020  0.63537  3.17082</code></pre>
+## -3.61693 -0.65902  0.04945  0.01906  0.68113  2.91706</code></pre>
 </div>
 <div id="makiing-a-list-of-these-different-dataframes" class="section level2">
 <h2>Makiing a list of these different dataframes</h2>
@@ -426,29 +426,29 @@ mean_and_sd(x_vec)</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  5.65  3.46</code></pre>
+## 1  5.18  3.05</code></pre>
 <p>We can apply the mean_and_sd function to each element of list_norms
 using the lines below.</p>
 <pre class="r"><code>mean_and_sd(list_norms[[1]])</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.86  1.03</code></pre>
+## 1  2.71  1.17</code></pre>
 <pre class="r"><code>mean_and_sd(list_norms[[2]])</code></pre>
 <pre><code>## # A tibble: 1 × 2
-##    mean    sd
-##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  1.64  6.03</code></pre>
+##     mean    sd
+##    &lt;dbl&gt; &lt;dbl&gt;
+## 1 -0.540  4.35</code></pre>
 <pre class="r"><code>mean_and_sd(list_norms[[3]])</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  9.97 0.221</code></pre>
+## 1  10.0 0.233</code></pre>
 <pre class="r"><code>mean_and_sd(list_norms[[4]])</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1 -2.76  1.21</code></pre>
+## 1 -2.70 0.823</code></pre>
 <p>define an output list with the same number of entries as my target
 dataframe; a sequence to iterate over; and a for loop body that applies
 the mean_and_sd function for each sequence element and saves the
@@ -467,17 +467,17 @@ output = map(list_norms, median) </code></pre>
 <p>check out some <code>map</code> variants</p>
 <pre class="r"><code>map_dfr(list_norms, mean_and_sd, .id = &quot;sample&quot;)</code></pre>
 <pre><code>## # A tibble: 4 × 3
-##   sample  mean    sd
-##   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1 a       2.86 1.03 
-## 2 b       1.64 6.03 
-## 3 c       9.97 0.221
-## 4 d      -2.76 1.21</code></pre>
+##   sample   mean    sd
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 a       2.71  1.17 
+## 2 b      -0.540 4.35 
+## 3 c      10.0   0.233
+## 4 d      -2.70  0.823</code></pre>
 <pre class="r"><code>map_dfr(list_norms, median)</code></pre>
 <pre><code>## # A tibble: 1 × 4
-##       a     b     c     d
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.86  1.07  9.91 -2.73</code></pre>
+##       a      b     c     d
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  2.68 -0.370  10.0 -2.90</code></pre>
 <p>try to out a lsit into a datframe</p>
 <pre class="r"><code>listcol_df = 
   tibble(
@@ -489,73 +489,72 @@ output = map(list_norms, median) </code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</code></pre>
 <pre class="r"><code>pull(listcol_df, &quot;sample&quot;)</code></pre>
 <pre><code>## $a
-##  [1] 1.6000566 1.9547296 4.2430424 3.4231422 3.4128101 2.6334126 3.5624233
-##  [8] 0.5587056 2.6740143 4.5167156 2.3056533 3.4165973 1.9909364 3.0386751
-## [15] 3.4233247 2.1795050 3.9405851 4.1480723 1.8412848 2.2441690
+##  [1] 0.7926260 2.7234175 2.2519497 2.1044779 0.7532239 2.8408943 4.6482628
+##  [8] 2.3262170 2.6426658 3.4257915 2.6430362 2.9517155 4.3001848 2.9833169
+## [15] 3.9900268 1.9485649 0.8801418 4.7769926 1.8942323 3.2715738
 ## 
 ## $b
-##  [1]  3.96478559 14.76960149 -1.62267286  7.60966161 -7.51447793 -5.27204488
-##  [7]  7.99197683  0.64731549  2.70379400  5.90167470 -5.21884922 -2.52629023
-## [13]  1.49565624 -2.03626401 -5.21828911 -5.17379077  8.20894359 -0.02581153
-## [19]  6.92040281  7.10603193
+##  [1]  2.67652081  6.07327501  0.08719399  3.50953323  3.44450799 -4.46048836
+##  [7] -2.51889206 -3.47844072  4.56082112  3.80783180  2.38869552  3.11187447
+## [13] -6.50961914 -2.56416963  2.81466758 -4.36966282 -7.72266934 -8.04618227
+## [19] -2.77653656 -0.82637893
 ## 
 ## $c
-##  [1]  9.873326 10.182069  9.851527  9.888711 10.072967  9.891132  9.925744
-##  [8]  9.401929 10.032734  9.838835 10.095314  9.886881 10.427089  9.628372
-## [15] 10.067476 10.209319  9.898655  9.893816 10.217071 10.042919
+##  [1]  9.948269 10.578404 10.258821  9.946125  9.876635 10.109214  9.918003
+##  [8] 10.066287  9.750577 10.099121 10.052073 10.004972  9.870484  9.582012
+## [15]  9.544391  9.878161 10.000647 10.201553 10.128080 10.195559
 ## 
 ## $d
-##  [1] -2.6703588 -1.5818939 -1.5323088 -3.5367019 -2.6677826 -2.8656047
-##  [7] -0.7094399 -2.5152247 -2.8254011 -3.6855285 -4.7776125 -2.7904339
-## [13] -2.8366652 -0.4914588 -1.8628323 -2.5403787 -4.2943909 -2.3259574
-## [19] -3.5246793 -5.1931713</code></pre>
+##  [1] -1.585476 -3.395431 -3.474356 -2.229521 -1.681725 -3.260586 -3.271472
+##  [8] -2.698970 -1.227460 -3.931752 -1.732415 -3.460342 -2.822676 -1.865560
+## [15] -1.868536 -2.979688 -3.029883 -3.988603 -2.488417 -3.067246</code></pre>
 <p>yes it did!!!!!</p>
 <p>can i apply <code>mean_and_sd</code></p>
 <pre class="r"><code>mean_and_sd(pull(listcol_df, sample)[[1]])</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.86  1.03</code></pre>
+## 1  2.71  1.17</code></pre>
 <pre class="r"><code>mean_and_sd(pull(listcol_df, sample)[[2]])</code></pre>
 <pre><code>## # A tibble: 1 × 2
-##    mean    sd
-##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  1.64  6.03</code></pre>
+##     mean    sd
+##    &lt;dbl&gt; &lt;dbl&gt;
+## 1 -0.540  4.35</code></pre>
 <pre class="r"><code>mean_and_sd(pull(listcol_df, sample)[[3]])</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  9.97 0.221</code></pre>
+## 1  10.0 0.233</code></pre>
 <pre class="r"><code>mean_and_sd(pull(listcol_df, sample)[[4]])</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1 -2.76  1.21</code></pre>
+## 1 -2.70 0.823</code></pre>
 <p>iterate using <code>map</code></p>
 <pre class="r"><code>map(pull(listcol_df, sample),mean_and_sd)</code></pre>
 <pre><code>## $a
 ## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.86  1.03
+## 1  2.71  1.17
 ## 
 ## $b
 ## # A tibble: 1 × 2
-##    mean    sd
-##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  1.64  6.03
+##     mean    sd
+##    &lt;dbl&gt; &lt;dbl&gt;
+## 1 -0.540  4.35
 ## 
 ## $c
 ## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  9.97 0.221
+## 1  10.0 0.233
 ## 
 ## $d
 ## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1 -2.76  1.21</code></pre>
+## 1 -2.70 0.823</code></pre>
 <p>addiing a column…</p>
 <pre class="r"><code>listcol_df |&gt;
   mutate(
@@ -575,16 +574,15 @@ listcol_df |&gt;
   select( -sample) |&gt; 
   unnest(summary)</code></pre>
 <pre><code>## # A tibble: 4 × 3
-##   name   mean    sd
-##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 a      2.86 1.03 
-## 2 b      1.64 6.03 
-## 3 c      9.97 0.221
-## 4 d     -2.76 1.21</code></pre>
+##   name    mean    sd
+##   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 a      2.71  1.17 
+## 2 b     -0.540 4.35 
+## 3 c     10.0   0.233
+## 4 d     -2.70  0.823</code></pre>
 </div>
 <div id="revisiting-nsduh" class="section level2">
-<h2>Revisiting NSDUH<br />
-</h2>
+<h2>Revisiting NSDUH</h2>
 <pre class="r"><code>nsduh_url = &quot;http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm&quot;
 
 nsduh_html = read_html(nsduh_url)
