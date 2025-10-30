@@ -175,7 +175,7 @@ plot this into a function
 ```{r}
 bday_sim = function (n_room) {
   
-  birthdays = sample(1:365, 5, replace = TRUE)
+  birthdays = sample(1:365, n_room, replace = TRUE)
 
 repeated_bday = length(unique(birthdays)) < n_room
 
@@ -192,7 +192,7 @@ bday_sim(20)
 bday_sim_results = 
   expand_grid(
     bdays = 5:50,
-    iter = 1:2500
+    iter = 1:12500
   ) |>
   mutate(
     results = map_lgl(bdays, bday_sim)
